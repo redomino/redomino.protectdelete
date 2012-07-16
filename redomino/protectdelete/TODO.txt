@@ -1,0 +1,1 @@
+* abilitare protezione solo se e'installato il prodotto
