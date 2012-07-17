@@ -12,7 +12,7 @@ How to tag an object as "protected":
 3. apply the redomino.protectdelete.interfaces.IProtectDelete marker interface
 4. as long as this plugin is installed, Managers will be the only one able to delete that object.
 
-navigation
+Also plone.app.layout.navigation.interfaces.INavigationRoot is protected as well as IProtectDelete.
 
 Authors
 -------
