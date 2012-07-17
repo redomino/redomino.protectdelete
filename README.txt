@@ -5,3 +5,10 @@ If you want to protect your stuff from delete, you may have a look at this Plone
 
 If you install redomino.protectdelete just the Manager can remove objects.
 
+navigation
+
+Authors
+-------
+
+* Davide Moro <davide.moro@redomino.com>
+
