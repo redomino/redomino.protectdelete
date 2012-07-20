@@ -14,11 +14,17 @@
       description="Installs the redomino.protectdelete package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
+
 
   <!-- Event handlers -->
   <subscriber
       for="redomino.protectdelete.interfaces.IProtectDelete
+           OFS.interfaces.IObjectWillBeRemovedEvent"
+      handler=".handlers.protect_delete" />
+
+  <!-- Event handlers -->
+  <subscriber
+      for="plone.app.layout.navigation.interfaces.INavigationRoot
            OFS.interfaces.IObjectWillBeRemovedEvent"
       handler=".handlers.protect_delete" />
   

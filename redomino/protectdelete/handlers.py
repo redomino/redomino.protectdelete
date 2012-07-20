@@ -1,3 +1,18 @@
+# Authors: Davide Moro <davide.moro@redomino.com> and contributors (see docs/CONTRIBUTORS.txt)
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as published
+# by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
 from zExceptions import Redirect
 
 from zope.component import getMultiAdapter
@@ -21,13 +36,12 @@ def protect_delete(obj, event):
 
         IMPORTANT: managers are not affected by these rules.
     """
-    if IProtectDelete.providedBy(obj) or INavigationRoot.providedBy(obj):
-        portal_quickinstaller = getToolByName(obj, 'portal_quickinstaller')
-        if portal_quickinstaller.isProductInstalled(PROJECTNAME):
-            membership = getMultiAdapter((obj, obj.REQUEST), name=u'plone_tools').membership()
-            if not membership.checkPermission('Manage portal', obj):
-                IStatusMessage(obj.REQUEST).addStatusMessage(_('label_cannotdelete', default='You cannot delete this item'), type='warning')
+    portal_quickinstaller = getToolByName(obj, 'portal_quickinstaller')
+    if portal_quickinstaller.isProductInstalled(PROJECTNAME):
+        membership = getMultiAdapter((obj, obj.REQUEST), name=u'plone_tools').membership()
+        if not membership.checkPermission('Manage portal', obj):
+            IStatusMessage(obj.REQUEST).addStatusMessage(_('label_cannotdelete', default='You cannot delete this item'), type='warning')
 
-                view_url = getMultiAdapter((obj, obj.REQUEST), name=u'plone_context_state').view_url()
-                raise Redirect, view_url
+            view_url = getMultiAdapter((obj, obj.REQUEST), name=u'plone_context_state').view_url()
+            raise Redirect, view_url
 
